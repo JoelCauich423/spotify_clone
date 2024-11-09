@@ -17,6 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
@@ -29,6 +30,8 @@ class _MyAppState extends State<MyApp> {
           unselectedLabelStyle: TextStyle(
             fontSize: 12,
           ),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white38,
           type: BottomNavigationBarType.fixed,
         ),
       ),
