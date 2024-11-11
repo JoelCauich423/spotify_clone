@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:spotify_clone/widgets/album_card.dart';
 
 class AlbumView extends StatefulWidget {
   const AlbumView({super.key});
@@ -15,6 +16,7 @@ class _AlbumViewState extends State<AlbumView> {
   double containerHeight = 500;
   double containerinitalHeight = 500;
   double imageOpacity = 1;
+  bool showTopBar = false;
   @override
   void initState() {
     imageSize = initialSize;
@@ -25,11 +27,17 @@ class _AlbumViewState extends State<AlbumView> {
       if (imageSize < 0){
         imageSize = 0;
       }
-      containerHeight = containerinitalHeight + scrollController.offset;
+      containerHeight = containerinitalHeight - scrollController.offset;
       if(containerHeight < 0){
         containerHeight = 0;
       }
       imageOpacity = imageSize / initialSize;
+      if(scrollController.offset > 224){
+        showTopBar = true;
+      }else{
+        showTopBar = false;
+      }
+      print(scrollController.offset);
       setState(() {});
     });
     super.initState();
@@ -49,7 +57,8 @@ class _AlbumViewState extends State<AlbumView> {
               children: [
                 Opacity(
                   opacity: imageOpacity.clamp(0, 1.0),
-                  child: Container(
+                  child: 
+                  Container(
                    decoration: BoxDecoration(boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(.5),
@@ -65,12 +74,11 @@ class _AlbumViewState extends State<AlbumView> {
                                   height: imageSize,
                                   fit: BoxFit.cover,
                                   ),
-                              ),
-                ),
-                  SizedBox(height: 100,)
-              ],
-            ),
-          ),
+                              ), ),
+                                  SizedBox(height: 100,)
+                            ],
+                       ),
+                   ),
           SafeArea(
             child: SingleChildScrollView(
               controller: scrollController,
@@ -87,23 +95,24 @@ class _AlbumViewState extends State<AlbumView> {
                         colors: [
                           Colors.black.withOpacity(0),
                           Colors.black.withOpacity(0),
+                          Colors.black.withOpacity(.59),
                           Colors.black.withOpacity(1),
                         ]),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Column(
                         children:[
                         SizedBox(height: initialSize + 132),
                           Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(19.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. ",
                                 style: Theme.of(context).textTheme.bodyMedium,
                                 ),
-                                SizedBox(height: 8),
+                                SizedBox(height: 10),
                                 Row(
                                   children: [
                                     Image(
@@ -131,40 +140,6 @@ class _AlbumViewState extends State<AlbumView> {
                                           Icon(Icons.more_horiz),
                                         ],
                                       ),
-                                      Positioned(
-                                        right: 0,
-                                        bottom: 0,
-                                        child: Stack(
-                                          alignment: Alignment.bottomRight,
-                                          children:[ Container(
-                                            width: 64,
-                                            height: 64,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff14D860),
-                                              ),
-                                              child: Icon(
-                                                Icons.play_arrow,
-                                                size: 60,
-                                                ),
-                                          ),
-                                          Container(
-                                            width: 26,
-                                            height: 26,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.white,
-                                              ),
-                                              child: Icon(
-                                                Icons.shuffle,
-                                                color:  Colors.black,
-                                                size: 26,
-                                                ),
-                                          )
-                                          ]
-                                        ),
-                                      )
                                     ],
                                   )
                               ],
@@ -175,13 +150,107 @@ class _AlbumViewState extends State<AlbumView> {
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.all(16),
                     color:  Colors.black,
-                    height: 1000,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Text(
+                        "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500"),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            children: [
+                              AlbumCard(
+                                label: "Get Turnt",
+                                image: AssetImage("assets/album_25.jpg"), onTap: () {  },
+                                ),
+                            ],
+                          ),
+                        ),
+                    ],
+                    ),
                   )
                 ],
               ),
             ),
-          )
+          ),
+        //app bar
+        Positioned(
+          child: Container(
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              color: showTopBar ? Color(0xFF9b27af).withOpacity(1) 
+              : Color(0xFF9b27af).withOpacity(0),
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
+              child: SafeArea(
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        left: 0,
+                        child: IconButton(
+                          onPressed: (){},
+                          icon: Icon(Icons.keyboard_arrow_left),
+                          ),
+                      ),
+                      AnimatedOpacity(
+                        duration: Duration(milliseconds: 250),
+                        opacity: showTopBar ? 1 : 0,
+                        child: Text(
+                          "Rosé & Bruno Mars",
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                      ),
+                        Positioned(
+                                          right: 0,
+                                          bottom: 
+                                          -10 - containerHeight.clamp(120.0, double.infinity),
+                                          child: Stack(
+                                            alignment: Alignment.bottomRight,
+                                            children:[ 
+                                          Container(
+                                              width: 64,
+                                              height: 64,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xff14D860),
+                                                ),
+                                                child: Icon(
+                                                  Icons.play_arrow,
+                                                  size: 60,
+                                                  ),
+                                            ),
+                                            Container(
+                                              width: 26,
+                                              height: 26,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                ),
+                                                child: Icon(
+                                                  Icons.shuffle,
+                                                  color:  Colors.black,
+                                                  size: 26,
+                                                  ),
+                                            )
+                                            ]
+                                          ),
+                                        )
+                          ],
+                        ),
+                ),
+              ),
+            ),))
         ],
         ),
     );
