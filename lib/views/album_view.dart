@@ -44,6 +44,7 @@ class _AlbumViewState extends State<AlbumView> {
   }
   @override
   Widget build(BuildContext context) {
+    final cardSize = MediaQuery.of(context).size.width /2 - 32;
     return Scaffold(
       body: Stack(
         children: [
@@ -156,20 +157,67 @@ class _AlbumViewState extends State<AlbumView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                       Text(
-                        "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500"),
+                        "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,"),
+                        SizedBox(height: 32,),
+                         Text("También te puede interesar", 
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AlbumCard(
-                                label: "Get Turnt",
+                               size: cardSize,
+                                label: "Get Turns", 
+                                image: AssetImage("assets/album_30.jpg"), onTap: () {  },
+                                ),
+                                AlbumCard(
+                                size: cardSize,
+                                label: "Get Turns", 
                                 image: AssetImage("assets/album_25.jpg"), onTap: () {  },
                                 ),
                             ],
                           ),
                         ),
-                    ],
-                    ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AlbumCard(
+                               size: cardSize,
+                                label: "Get Turns", 
+                                image: AssetImage("assets/album_26.jpg"), onTap: () {  },
+                                ),
+                                AlbumCard(
+                                size: cardSize,
+                                label: "Get Turns", 
+                                image: AssetImage("assets/album_27.jpg"), onTap: () {  },
+                                ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AlbumCard(
+                               size: cardSize,
+                                label: "Get Turns", 
+                                image: AssetImage("assets/album_28.jpg"), onTap: () {  },
+                                ),
+                                AlbumCard(
+                                size: cardSize,
+                                label: "Get Turns", 
+                                image: AssetImage("assets/album_29.jpg"), onTap: () {  },
+                                ),
+                            ],
+                          ),
+                        )
+                    ],),
+                    height: 1000,
                   )
                 ],
               ),
@@ -179,7 +227,7 @@ class _AlbumViewState extends State<AlbumView> {
         Positioned(
           child: Container(
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 250),
               color: showTopBar ? Color(0xFF9b27af).withOpacity(1) 
               : Color(0xFF9b27af).withOpacity(0),
               padding: EdgeInsets.symmetric(
@@ -198,7 +246,9 @@ class _AlbumViewState extends State<AlbumView> {
                       Positioned(
                         left: 0,
                         child: IconButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
                           icon: Icon(Icons.keyboard_arrow_left),
                           ),
                       ),

@@ -6,12 +6,14 @@ class AlbumCard extends StatelessWidget {
   final ImageProvider image;
   final String label;
   final GestureTapCallback onTap; // Cambiado de Function a GestureTapCallback
+  final double size;
 
   const AlbumCard({
     super.key,
     required this.image,
     required this.label,
     required this.onTap,
+    this.size = 150,
   });
 
   @override
@@ -23,8 +25,8 @@ class AlbumCard extends StatelessWidget {
         children: [
           Image(
             image: image,
-            width: 150,
-            height: 150,
+            width: size,
+            height: size,
             fit: BoxFit.cover,
           ),
           const SizedBox(height: 10),
