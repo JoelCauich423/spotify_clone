@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:spotify_clone/widgets/album_card.dart';
 
 class AlbumView extends StatefulWidget {
-  const AlbumView({super.key});
+  // const AlbumView({super.key});
+    final ImageProvider image;
 
+  const AlbumView({super.key, required this.image});
   @override
   State<AlbumView> createState() => _AlbumViewState();
 }
@@ -17,6 +19,8 @@ class _AlbumViewState extends State<AlbumView> {
   double containerinitalHeight = 500;
   double imageOpacity = 1;
   bool showTopBar = false;
+
+
   @override
   void initState() {
     imageSize = initialSize;
@@ -70,7 +74,7 @@ class _AlbumViewState extends State<AlbumView> {
                                 ],
                                 ),
                                 child: Image(
-                                  image: AssetImage("assets/album_24.jpg"),
+                                  image: widget.image,
                                   width: imageSize,
                                   height: imageSize,
                                   fit: BoxFit.cover,
@@ -117,7 +121,7 @@ class _AlbumViewState extends State<AlbumView> {
                                 Row(
                                   children: [
                                     Image(
-                                      image: AssetImage("assets/LogoSpotify.png"), 
+                                      image: AssetImage("assets/LogoSpotify.png"),
                                       width: 40, 
                                       height: 40,
                                       ),
@@ -170,7 +174,7 @@ class _AlbumViewState extends State<AlbumView> {
                               AlbumCard(
                                size: cardSize,
                                 label: "Get Turns", 
-                                image: AssetImage("assets/album_30.jpg"), onTap: () {  },
+                                image: AssetImage("assets/album_24.jpg"), onTap: () {  },
                                 ),
                                 AlbumCard(
                                 size: cardSize,
@@ -245,11 +249,14 @@ class _AlbumViewState extends State<AlbumView> {
                     children: [
                       Positioned(
                         left: 0,
-                        child: IconButton(
-                          onPressed: (){
+                        child: GestureDetector(
+                          onTap: (){
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.keyboard_arrow_left),
+                          child: Icon(
+                            Icons.keyboard_arrow_left,
+                            size: 42,
+                            ),
                           ),
                       ),
                       AnimatedOpacity(
@@ -263,7 +270,7 @@ class _AlbumViewState extends State<AlbumView> {
                         Positioned(
                                           right: 0,
                                           bottom: 
-                                          -10 - containerHeight.clamp(120.0, double.infinity),
+                                          -10 - containerHeight.clamp(30.0, double.infinity),
                                           child: Stack(
                                             alignment: Alignment.bottomRight,
                                             children:[ 

@@ -19,7 +19,14 @@ class AlbumCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,  // Ahora esto funcionará correctamente
+      onTap: (){
+                            Navigator.push(
+                             context, 
+                             MaterialPageRoute(
+                              builder: (context) => AlbumView(image: image),
+                              ),
+                            );
+                          },  // Ahora esto funcionará correctamente
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

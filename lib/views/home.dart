@@ -73,67 +73,32 @@ class _HomeViewState extends State<HomeView> {
                       children: [
                         AlbumCard(
                           label: "Heavy is th clow", 
-                          image: AssetImage("assets/album_1.jpg"),
-                          onTap: (){
-                            Navigator.push(
-                             context, 
-                             MaterialPageRoute(
-                              builder: (context) => AlbumView(),
-                              ),
-                            );
-                          }
+                          image: AssetImage("assets/album_1.jpg"), onTap: () {  },
+                          
                           ),
                         SizedBox(width: 20),
                         AlbumCard(
                           label: "Standing Next to You", 
-                          image: AssetImage("assets/album_2.jpg"),
-                          onTap: (){
-                            Navigator.push(
-                             context, 
-                             MaterialPageRoute(
-                              builder: (context) => AlbumView(),
-                              ),
-                            );
-                          }
+                          image: AssetImage("assets/album_2.jpg"), onTap: () {  },
+                          
                         ),
                         SizedBox(width: 20),
                         AlbumCard(
                           label: "You Could Be Mine", 
-                          image: AssetImage("assets/album_3.jpg"),
-                          onTap: (){
-                            Navigator.push(
-                             context, 
-                             MaterialPageRoute(
-                              builder: (context) => AlbumView(),
-                              ),
-                            );
-                          }
+                          image: AssetImage("assets/album_3.jpg"), onTap: () {  },
+                          
                         ),
                         SizedBox(width: 20),
                         AlbumCard(
                           label: "Highway to Hell", 
-                          image: AssetImage("assets/album_4.jpg"),
-                          onTap: (){
-                            Navigator.push(
-                             context, 
-                             MaterialPageRoute(
-                              builder: (context) => AlbumView(),
-                              ),
-                            );
-                          }
+                          image: AssetImage("assets/album_4.jpg"), onTap: () {  },
+                          
                         ),
                         SizedBox(width: 20),
                         AlbumCard(
                           label: "I Was Made For Lovin'You", 
-                          image: AssetImage("assets/album_5.jpg"),
-                          onTap: (){
-                            Navigator.push(
-                             context, 
-                             MaterialPageRoute(
-                              builder: (context) => AlbumView(),
-                              ),
-                            );
-                          }
+                          image: AssetImage("assets/album_5.jpg"), onTap: () {  },
+                          
                         ),
                       ],
                     ),
