@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AlbumView extends StatefulWidget {
@@ -8,16 +9,71 @@ class AlbumView extends StatefulWidget {
 }
 
 class _AlbumViewState extends State<AlbumView> {
+  late ScrollController scrollController;
+  double imageSize = 0;
+  double initialSize = 240;
+  double containerHeight = 500;
+  double containerinitalHeight = 500;
+  double imageOpacity = 1;
+  @override
+  void initState() {
+    imageSize = initialSize;
+    scrollController = ScrollController()
+    ..addListener((){
+      imageSize = initialSize - scrollController.offset;
+      print(imageSize);
+      if (imageSize < 0){
+        imageSize = 0;
+      }
+      containerHeight = containerinitalHeight + scrollController.offset;
+      if(containerHeight < 0){
+        containerHeight = 0;
+      }
+      imageOpacity = imageSize / initialSize;
+      setState(() {});
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Container(
+            height: containerHeight,
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.center,
             color: Colors.purple,
+            child: Column(
+              mainAxisAlignment:  MainAxisAlignment.center, 
+              children: [
+                Opacity(
+                  opacity: imageOpacity.clamp(0, 1.0),
+                  child: Container(
+                   decoration: BoxDecoration(boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.5),
+                                    offset:  Offset(0, 20),
+                                    blurRadius: 32,
+                                    spreadRadius: 16,
+                                  )
+                                ],
+                                ),
+                                child: Image(
+                                  image: AssetImage("assets/album_24.jpg"),
+                                  width: imageSize,
+                                  height: imageSize,
+                                  fit: BoxFit.cover,
+                                  ),
+                              ),
+                ),
+                  SizedBox(height: 100,)
+              ],
+            ),
           ),
           SafeArea(
             child: SingleChildScrollView(
+              controller: scrollController,
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -35,27 +91,10 @@ class _AlbumViewState extends State<AlbumView> {
                         ]),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      padding: const EdgeInsets.only(top: 40),
                       child: Column(
                         children:[
-                        Container(
-                          decoration: BoxDecoration(boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(.5),
-                              offset:  Offset(0, 20),
-                              blurRadius: 32,
-                              spreadRadius: 16,
-                            )
-                          ],
-                          ),
-                          child: Image(
-                            image: AssetImage("assets/album_24.jpg"),
-                            width: MediaQuery.of(context).size.width - 100,
-                            height: MediaQuery.of(context).size.width - 100,
-                            fit: BoxFit.cover,
-                            ),
-                        ),
-                        SizedBox(height: 16),
+                        SizedBox(height: initialSize + 132),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
@@ -107,19 +146,20 @@ class _AlbumViewState extends State<AlbumView> {
                                               ),
                                               child: Icon(
                                                 Icons.play_arrow,
-                                                size: 50,
+                                                size: 60,
                                                 ),
                                           ),
                                           Container(
-                                            width: 24,
-                                            height: 24,
+                                            width: 26,
+                                            height: 26,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: Colors.white,
                                               ),
                                               child: Icon(
-                                                Icons.play_arrow,
-                                                size: 20,
+                                                Icons.shuffle,
+                                                color:  Colors.black,
+                                                size: 26,
                                                 ),
                                           )
                                           ]
@@ -136,7 +176,7 @@ class _AlbumViewState extends State<AlbumView> {
                   ),
                   Container(
                     color:  Colors.black,
-                    height: 500,
+                    height: 1000,
                   )
                 ],
               ),
