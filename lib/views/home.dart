@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Escuchado recientemente", 
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Row(
                           children: [
@@ -111,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
                       children: [
                         Text(
                           "Buenas Noche",
-                           style: Theme.of(context).textTheme.headlineMedium,
+                           style: Theme.of(context).textTheme.headlineSmall,
                            ),
                         SizedBox( height: 16),
                         Row(
@@ -165,7 +165,7 @@ class _HomeViewState extends State<HomeView> {
                          padding: const EdgeInsets.all(16.0),
                          child: Text(
                             "Basado en tu escucha reciente",
-                             style: Theme.of(context).textTheme.headlineMedium,
+                             style: Theme.of(context).textTheme.headlineSmall,
                              ),
                        ),
                        SingleChildScrollView(
@@ -199,7 +199,7 @@ class _HomeViewState extends State<HomeView> {
                          padding: const EdgeInsets.all(16.0),
                          child: Text(
                             "Estaciones recomendadas",
-                             style: Theme.of(context).textTheme.headlineMedium,
+                             style: Theme.of(context).textTheme.headlineSmall,
                              ),
                        ),
                        SingleChildScrollView(
